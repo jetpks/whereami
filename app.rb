@@ -6,6 +6,9 @@ require 'yaml'
 require 'mysql2'
 require 'sinatra'
 
+CONFIG = YAML.load_file('./config.yml')
+MYSQL  = CONFIG['mysql']
+
 get '/api/last/:amount' do
   # return last :amount of locations.
   # 0 for all
@@ -57,7 +60,7 @@ def getlast(amount)
 end
 
 def lolmysql
-  Mysql2::Client.new(:host => 'localhost', :username => 'whereami', :password => 'PmfQY3SpsAyCex_FfH7ke_K5FZqwW9HWc6QhFRAxW4_crJKKhjNYHMGHnKDWbg_e', :database => 'whereami')
+  Mysql2::Client.new(:host => MYSQL['host'], :username => MYSQL['user'], :password => MYSQL['pass'], :database => MYSQL['db'], :port => MYSQL['port'])
 end
 
 def has_badchars?(thingy)
