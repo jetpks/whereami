@@ -10,7 +10,9 @@ CONFIG = YAML.load_file('./config.yml')
 MYSQL  = CONFIG['mysql']
 
 get '/api/mapkey' do
-  json { :key => CONFIG['map']['googlekey'] }
+  pack = {}
+  pack[:key] = CONFIG['map']['googlekey']
+  json pack
 end
 
 get '/api/last/:amount' do
