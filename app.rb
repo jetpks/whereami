@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'json'
+require 'yaml'
 require 'mysql2'
 require 'sinatra'
 
