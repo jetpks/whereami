@@ -4,3 +4,5 @@ mysql:
   user: database-user
   pass: password-goes-here
   port: 3306
+map:
+  googlekey: google-maps-api-key-goes-here

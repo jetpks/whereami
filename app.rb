@@ -9,6 +9,10 @@ require 'sinatra/json'
 CONFIG = YAML.load_file('./config.yml')
 MYSQL  = CONFIG['mysql']
 
+get '/api/mapkey' do
+  json { :key => CONFIG['map']['googlekey'] }
+end
+
 get '/api/last/:amount' do
   # return last :amount of locations.
   # 0 for all
