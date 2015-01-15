@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'json'
 require 'yaml'
 require 'mysql2'
 require 'sinatra'
+require 'sinatra/json'
 
 CONFIG = YAML.load_file('./config.yml')
 MYSQL  = CONFIG['mysql']
@@ -17,7 +17,7 @@ get '/api/last/:amount' do
   if(amount < 0) then
     badrequest ":amount needs to be 0 or greater!"
   end
-  getlast(amount).to_json
+  json getlast(amount)
 end
 
 post '/api/update' do
