@@ -3,15 +3,20 @@
 
   var endpoint = 'http://' + location.hostname + '/api'
     , map
+    , style = [{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]
     ;
 
   function draw() {
     var mapOpts = {
             center: new google.maps.LatLng(30,-40)
           , zoom: 2
+          , mapTypeControlOptions: { mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style' ] }
         }
+      , styledMap = new google.maps.StyledMapType(style, {name: 'styled'})
       ;
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOpts);
+    map.mapTypes.set('map_style', styledMap);
+    map.setMapTypeId('map_style');
     get_locs();
   }
 
