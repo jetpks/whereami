@@ -55,7 +55,7 @@
   
   function lock_until_ready(callback) {
     if(!window.maps_are_ready) {
-      setTimeout(lock_until_ready, 10);
+      setTimeout(function() { lock_until_ready(callback); }, 10);
       return;
     }
     callback();
