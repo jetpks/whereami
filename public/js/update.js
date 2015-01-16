@@ -51,26 +51,28 @@
     });
   }
   
-  function lock_until_ready() {
+  function lock_until_ready(callback) {
     if(!window.maps_are_ready) {
       setTimeout(lock_until_ready, 10);
       return;
     }
-    get_location();
+    callback();
   }
 
   function get_location() {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var geocoder = new google.maps.Geocoder()
-        , latlng = new google.maps.LatLng(position['coords']['latitude'], position['coords']['longitude'])
-        ;
-      geocoder.geocode({'latLng': latlng}, function(results, status) {
-        if(status != google.maps.GeocoderStatus.OK) {
-          show_error("Unable to geocode coordinates.");
-          console.log(results, status);
-          return;
-        }
-        parse_googles_weird_shit(results[0], position['coords']['latitude'], position['coords']['longitude']);
+      lock_until_ready(function() {
+        var geocoder = new google.maps.Geocoder()
+          , latlng = new google.maps.LatLng(position['coords']['latitude'], position['coords']['longitude'])
+          ;
+        geocoder.geocode({'latLng': latlng}, function(results, status) {
+          if(status != google.maps.GeocoderStatus.OK) {
+            show_error("Unable to geocode coordinates.");
+            console.log(results, status);
+            return;
+          }
+          parse_googles_weird_shit(results[0], position['coords']['latitude'], position['coords']['longitude']);
+        });
       });
     });
   }
@@ -98,7 +100,7 @@
       script.src = 'https://maps.googleapis.com/maps/api/js?key=' + data["key"]
         + '&callback=all_loaded_tnks';
       $('head').append(script);
-      lock_until_ready();
+      get_location();
     });
   }
 
