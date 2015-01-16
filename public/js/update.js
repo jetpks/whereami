@@ -5,17 +5,24 @@
     ;
 
   function post_data(lat, lng, city, state, country, airport) {
+    var secret = get_url_param('s')
+      ;
     show_status("Uploading data...");
+    
     $.post(endpoint + '/update', {
         latitude: lat
       , longitude: lng
       , city: city
       , state: state
       , country: country
+      , secret: secret
 //      , airport: airport
     }, function(data, status, xhr) {
-      console.log('data:', data);
-      console.log('status:', status);
+      if(status != "success") {
+        show_error(data);
+        console.error(data);
+        return;
+      }
       show_status('Done!');
     });
   }
@@ -79,6 +86,14 @@
         });
       });
     });
+  }
+
+  /* Taken from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
+  function get_url_param(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   }
 
   function show_status(status) {
