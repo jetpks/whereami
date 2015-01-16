@@ -2,6 +2,7 @@
   "use strict";
 
   var endpoint = 'http://' + location.hostname + '/api'
+    , map
     ;
 
   function draw() {
@@ -9,9 +10,38 @@
             center: new google.maps.LatLng(30,-40)
           , zoom: 2
         }
-      , map = new google.maps.Map(document.getElementById("map-canvas"), mapOpts)
       ;
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOpts);
+    get_locs();
+  }
 
+  function add_to_list(loc, callback) {
+    $('#loclist').append('<li>' + loc['city'] + ', ' + loc['state'] + ', ' + loc['country'] + '</li>');
+    callback();
+  }
+
+  function set_marker(loc, callback) {
+    var latlng = new google.maps.LatLng(loc['latitude'], loc['longitude'])
+      , marker = new google.maps.Marker({
+            position: latlng
+          , title: loc['city'] + ', ' + loc['state'] + ', ' + loc['country']
+        })
+      ;
+      marker.setMap(map);
+      add_to_list(loc, callback);
+  }
+
+  function get_locs() {
+    $.get(endpoint + '/last/0', function(data, status, xhr) {
+      if(status != "success") {
+        show_error("Problem getting locations.");
+        console.error('status:', status, 'data:', data);
+        return;
+      }
+      async.each(data, set_marker, function(err) {
+
+      });
+    });
   }
 
   function show_status(status) {
