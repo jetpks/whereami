@@ -25,9 +25,9 @@
       , success: function(data, status, xhr) {
           show_status('Done!');
         }
-      , failure: function(data, status, xhr) {
-          show_error(data);
-          console.error(data);
+      , error: function(xhr, status, err) {
+          show_error(err);
+          console.error(err);
         }
     });
   }
