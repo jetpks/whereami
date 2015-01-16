@@ -206,9 +206,19 @@ ul.posts span {
 /*
 /*****************************************************************************/
 
+#loclist {
+  float: left;
+  width: 25%;
+  margin-left: auto;
+  margin-right: 0;
+}
+
 #map-container {
-  width: 66em;
+  float: right;
+  width: 65%;
   height: 90%;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 #map-canvas {
