@@ -4,7 +4,16 @@
   var endpoint = 'http://' + location.hostname + '/api'
     ;
 
-  
+  function draw() {
+    var mapOpts = {
+            center: new google.maps.LatLng(0,0)
+          , zoom: 4
+        }
+      , map = new google.maps.Map(document.getElementById("map-canvas"), mapOpts)
+      ;
+
+  }
+
   function show_status(status) {
     $('#status').prepend('<h2>' + status + '</h2>');
   }
@@ -27,6 +36,7 @@
       return;
     }
     show_status("Initializing!");
+    lock_until_ready(draw);
   }
 
   $(document).ready(bootstrap);
