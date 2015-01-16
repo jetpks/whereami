@@ -29,7 +29,7 @@
           show_error(data);
           console.error(data);
         }
-      ;
+    });
   }
 
   function get_airport(lat, long, callback) {
