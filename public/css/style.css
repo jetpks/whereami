@@ -209,16 +209,16 @@ ul.posts span {
 #loclist {
   float: left;
   width: 25%;
-  margin-left: auto;
-  margin-right: 0;
+  padding-left: 2em;
+  padding-bottom: 2em;
 }
 
 #map-container {
   float: right;
   width: 65%;
-  height: 90%;
-  margin-left: 0;
-  margin-right: auto;
+  height: 75%;
+  padding-right: 2em;
+  padding-bottom: 2em;
 }
 
 #map-canvas {
