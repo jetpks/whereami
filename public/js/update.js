@@ -9,22 +9,27 @@
       ;
     show_status("Uploading data...");
     
-    $.post(endpoint + '/update', {
-        latitude: lat
-      , longitude: lng
-      , city: city
-      , state: state
-      , country: country
-      , secret: secret
-//      , airport: airport
-    }, function(data, status, xhr) {
-      if(status != "success") {
-        show_error(data);
-        console.error(data);
-        return;
-      }
-      show_status('Done!');
-    });
+    $.ajax({
+        url: endpoint + '/update'
+      , type: "POST"
+      , data: {
+          latitude: lat
+        , longitude: lng
+        , city: city
+        , state: state
+        , country: country
+        , secret: secret
+//        , airport: airport
+        }
+      , dataType: "text"
+      , success: function(data, status, xhr) {
+          show_status('Done!');
+        }
+      , failure: function(data, status, xhr) {
+          show_error(data);
+          console.error(data);
+        }
+      ;
   }
 
   function get_airport(lat, long, callback) {
