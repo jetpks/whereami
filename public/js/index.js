@@ -12,7 +12,7 @@
           , zoom: 2
           , mapTypeControlOptions: { mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style' ] }
         }
-      , styledMap = new google.maps.StyledMapType(style, {name: 'styled'})
+      , styledMap = new google.maps.StyledMapType(style, {name: 'Locations of Me'})
       ;
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOpts);
     map.mapTypes.set('map_style', styledMap);
