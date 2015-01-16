@@ -5,6 +5,7 @@
     ;
 
   function post_data(lat, lng, city, state, country, airport) {
+    show_status("Uploading data...");
     $.post(endpoint + '/update', {
         latitude: lat
       , longitude: lng
@@ -15,7 +16,7 @@
     }, function(data, status, xhr) {
       console.log('data:', data);
       console.log('status:', status);
-      show_status('OK');
+      show_status('Done!');
     });
   }
 
@@ -28,6 +29,7 @@
       , state
       , country
       ;
+    show_status("Translating coordinates...");
     async.each(results['address_components'], function(loc, next) {
       if(loc['types'][0] == 'locality') {
         city = loc['long_name'];
@@ -60,8 +62,10 @@
   }
 
   function get_location() {
+    show_status("Acquiring current location...");
     navigator.geolocation.getCurrentPosition(function(position) {
       lock_until_ready(function() {
+        show_status("Locked.");
         var geocoder = new google.maps.Geocoder()
           , latlng = new google.maps.LatLng(position['coords']['latitude'], position['coords']['longitude'])
           ;
@@ -78,14 +82,15 @@
   }
 
   function show_status(status) {
-    // TODO implement.
+    $('#status').prepend('<h2>' + status + '</h2>');
   }
 
   function show_error(error) {
-    // TODO implement.
+    $('#error').prepend('<h2>' + error + '</h2>');
   }
 
   function load_mapsapi() {
+    show_status("Loading google maps api.");
     $.get(endpoint + '/mapkey', function(data, status, xhr) {
       var key
         , script = document.createElement("script")
@@ -109,12 +114,14 @@
       show_error("No geolocation api available. Unable to update.");
       return;
     }
+    show_status("Initializing!");
     load_mapsapi();
   }
 
   $(document).ready(bootstrap);
 }());
 
+/* Hack to get around loading google maps js asynchronously. */
 function all_loaded_tnks() {
   window.maps_are_ready = true;
 }
