@@ -89,39 +89,14 @@
     $('#error').prepend('<h2>' + error + '</h2>');
   }
 
-  function load_mapsapi() {
-    show_status("Loading google maps api.");
-    $.get(endpoint + '/mapkey', function(data, status, xhr) {
-      var key
-        , script = document.createElement("script")
-        ;
-      if(status != "success") {
-        console.error(e, data, status, xhr);
-        show_error('Unable to get maps api key.');
-        return;
-      }
-      window.maps_are_ready = false;
-      script.type = "text/javascript";
-      script.src = 'https://maps.googleapis.com/maps/api/js?key=' + data["key"]
-        + '&callback=all_loaded_tnks';
-      $('head').append(script);
-      get_location();
-    });
-  }
-
   function bootstrap() {
     if(! "geolocation" in navigator) {
       show_error("No geolocation api available. Unable to update.");
       return;
     }
     show_status("Initializing!");
-    load_mapsapi();
+    get_location();
   }
 
   $(document).ready(bootstrap);
 }());
-
-/* Hack to get around loading google maps js asynchronously. */
-function all_loaded_tnks() {
-  window.maps_are_ready = true;
-}
