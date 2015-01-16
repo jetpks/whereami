@@ -6,7 +6,7 @@
 
   function draw() {
     var mapOpts = {
-            center: new google.maps.LatLng(30,-50)
+            center: new google.maps.LatLng(30,-40)
           , zoom: 2
         }
       , map = new google.maps.Map(document.getElementById("map-canvas"), mapOpts)
