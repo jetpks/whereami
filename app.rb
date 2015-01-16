@@ -8,6 +8,7 @@ require 'sinatra/json'
 
 CONFIG = YAML.load_file('./config.yml')
 MYSQL  = CONFIG['mysql']
+SECRET = CONFIG['secret']['key']
 
 get '/api/mapkey' do
   pack = {}
@@ -29,8 +30,13 @@ end
 post '/api/update' do
   # shove junk into the db.
   # Pretty much just validate
+  secret = params[:secret]
   latitude = params[:latitude].to_f
   longitude = params[:longitude].to_f
+
+  if(secret != SECRET) {
+    badrequest "Invalid key."
+  }
 
   if(latitude.abs > 90 or longitude.abs > 180) then
     badrequest "Invalid longitude or latitude: long(#{longitude}), lat(#{latitude})"

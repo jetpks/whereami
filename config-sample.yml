@@ -6,3 +6,5 @@ mysql:
   port: 3306
 map:
   googlekey: google-maps-api-key-goes-here
+secret:
+  key: secret-key-you-can-post-goes-here
