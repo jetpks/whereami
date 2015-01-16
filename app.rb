@@ -34,9 +34,9 @@ post '/api/update' do
   latitude = params[:latitude].to_f
   longitude = params[:longitude].to_f
 
-  if(secret != SECRET) {
+  if(secret != SECRET) then
     badrequest "Invalid key."
-  }
+  end
 
   if(latitude.abs > 90 or longitude.abs > 180) then
     badrequest "Invalid longitude or latitude: long(#{longitude}), lat(#{latitude})"
