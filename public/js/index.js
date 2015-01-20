@@ -54,7 +54,7 @@
 
   function parse_time(raw, callback) {
     var date = new Date(0);
-    date.setUTCSeconds(raw);
+    date.setUTCSeconds(parseInt(raw));
     callback(date.toString());
   }
 
