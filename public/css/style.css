@@ -220,6 +220,8 @@ ul.posts span {
 
 #loclist > ol > li:nth-child(1) {
   background-color: #9f9;
+  border-radius: 0.5em; 
+  box-shadow: 0 0 1em -0.4em #303030;
 }
 
 #map-container {
