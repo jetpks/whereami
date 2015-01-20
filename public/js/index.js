@@ -21,8 +21,11 @@
   }
 
   function add_to_list(loc, callback) {
-    $('#loclist').append('<li>' + loc['city'] + ', ' + loc['state'] + ', ' + loc['country'] + '</li>');
-    callback();
+    parse_time(loc, function(time) {
+      $('#loclist > ol').append('<li><span class="loctime">' + time + '</span><span class="locloc">' + loc['city'] + ', ' + loc['state'] + ', ' + loc['country'] + '</span></li>');
+      
+      callback();
+    });
   }
 
   function set_marker(loc, callback) {
@@ -32,7 +35,7 @@
           , title: loc['city'] + ', ' + loc['state'] + ', ' + loc['country']
         })
       ;
-      marker.setMap(map);
+    marker.setMap(map);
       add_to_list(loc, callback);
   }
 
@@ -47,6 +50,12 @@
 
       });
     });
+  }
+
+  function parse_time(raw, callback) {
+    var date = new Date(0);
+    date.setUTCSeconds(raw);
+    callback(date.toString());
   }
 
   function show_status(status) {
