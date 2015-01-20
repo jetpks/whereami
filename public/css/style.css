@@ -218,7 +218,7 @@ ul.posts span {
   padding: 0.5em;
 }
 
-#loclist > ol:nth-child(1) {
+#loclist > ol > li:nth-child(1) {
   background-color: #9f9;
 }
 
