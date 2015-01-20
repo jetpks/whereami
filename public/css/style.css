@@ -209,8 +209,17 @@ ul.posts span {
 #loclist {
   float: left;
   width: 25%;
+  min-width: 23em;
   height: 36em;
   font-family: monospace;
+}
+
+#loclist > ol > li {
+  padding: 0.5em;
+}
+
+#loclist > ol:nth-child(1) {
+  background-color: #9f9;
 }
 
 #map-container {
