@@ -209,9 +209,15 @@ ul.posts span {
 #loclist {
   float: left;
   width: 25%;
-  min-width: 23em;
-  height: 36em;
+  min-width: 24em;
+  height: 40em;
   font-family: monospace;
+  overflow: scroll;
+}
+
+#loclist > ol {
+  list-style-type: none;
+  padding: 0.5em;
 }
 
 #loclist > ol > li {
