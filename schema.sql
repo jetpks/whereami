@@ -26,23 +26,15 @@ CREATE TABLE `locations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `longitude` float DEFAULT NULL,
   `latitude` float DEFAULT NULL,
-  `timestamp` int(11) DEFAULT NULL,
+  `timestamp` int(11) NOT NULL,
   `city` text,
   `state` text,
   `country` text,
   PRIMARY KEY (`id`),
-  KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `id` (`id`) USING BTREE,
+  KEY `timestamp` (`timestamp`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `locations`
---
-
-LOCK TABLES `locations` WRITE;
-/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -53,4 +45,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-15 19:57:29
+-- Dump completed on 2015-01-24 10:31:01
