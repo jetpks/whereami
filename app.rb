@@ -30,9 +30,17 @@ end
 post '/api/update' do
   # shove junk into the db.
   # Pretty much just validate
+  latitude = Float.new
+  longitude = Float.new
   secret = params[:secret]
-  latitude = params[:latitude].to_f
-  longitude = params[:longitude].to_f
+  begin
+    latitude = params[:latitude].to_f
+    longitude = params[:longitude].to_f
+  rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace.inspect
+    badrequest "invalid longitude or latitude"
+  end
 
   if(secret != SECRET) then
     badrequest "Invalid key."
