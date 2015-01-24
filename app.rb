@@ -73,7 +73,7 @@ def getlast(amount)
   end
   ret = Array.new
   client = lolmysql
-  client.query("SELECT `timestamp`,`latitude`,`longitude`,`city`,`state`,`country` FROM `locations` ORDER BY `id` DESC #{limit}").each do |row|
+  client.query("SELECT `timestamp`,`latitude`,`longitude`,`city`,`state`,`country` FROM `locations` ORDER BY `timestamp` DESC #{limit}").each do |row|
     ret.push(row)
   end
   return ret
