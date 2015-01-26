@@ -30,8 +30,8 @@ end
 post '/api/update' do
   # shove junk into the db.
   # Pretty much just validate
-  latitude = Float.new
-  longitude = Float.new
+  latitude = 0.0
+  longitude = 0.0
   secret = params[:secret]
   begin
     latitude = params[:latitude].to_f
